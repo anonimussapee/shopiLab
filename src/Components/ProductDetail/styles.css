@@ -1,5 +1,12 @@
 .product-detail {
-  width: 360px;
+  width: 350px;
   height: 86vh;
   bottom: 0;
+}
+@media (max-width:400px) {
+  .product-detail{
+    width: 320px;
+    height: 70vh;
+    overflow-y: scroll;
+  }
 }
