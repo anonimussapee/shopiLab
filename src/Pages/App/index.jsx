@@ -9,6 +9,7 @@ import SignIn from '../SignIn'
 import Navbar from '../../Components/Navbar'
 import CheckoutSideMenu from '../../Components/CheckoutSideMenu'
 import './App.css'
+import { ContextSignInProvider } from '../../Context/ContextSignIn'
 
 const AppRoutes = () => {
   let routes = useRoutes([
@@ -33,11 +34,13 @@ const AppRoutes = () => {
 const App = () => {
   return (
     <ShoppingCartProvider>
-      <BrowserRouter>
+      <ContextSignInProvider>
+         <BrowserRouter>
         <AppRoutes />
         <Navbar />
         <CheckoutSideMenu />
       </BrowserRouter>
+      </ContextSignInProvider>
     </ShoppingCartProvider>
   )
 }

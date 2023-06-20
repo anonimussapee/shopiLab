@@ -26,12 +26,15 @@ function Home() {
       <div className='flex items-center justify-center relative w-80 mb-4'>
         <h1 className='font-medium text-xl'>Exclusive Products</h1>
       </div>
-      <input
+      <form onSubmit={e=>e.preventDefault()}>
+        <input
         type="text"
         placeholder='Search a product'
-        className='rounded-lg border border-black w-80 p-4 mb-4 focus:outline-none'
+        className='rounded-lg border border-black w-80 p-4 mb-4 focus:outline-none' name='searchProd'
         onChange={(event) => context.setSearchByTitle(event.target.value)} />
-      <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
+      </form>
+      
+      <div className='grid ss:grid-cols-1 xs:grid-cols-2 xs:gap-0 sm:grid-cols-3 sm:gap-2 lg:gap-4 lg:grid-cols-4 w-full m-auto h-auto max-w-screen-lg justify-items-center'>
         {renderView()}
       </div>
       <ProductDetail />
