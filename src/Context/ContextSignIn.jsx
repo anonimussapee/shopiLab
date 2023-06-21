@@ -5,14 +5,15 @@ const ContextSignIn = createContext();
 
 const ContextSignInProvider = ({children}) =>{
   
-  const userData = useLocaleStorage('userData',{state:false});
 
 
-  const [userLogin, setUserLogin] = useState(userData.data.state);
+  const [userLogin, setUserLogin] = useState(false);
 
-  console.log(userLogin);
+
+  const userData = useLocaleStorage('userData',{});
+
   const itsSignIn = () => {
-     if(userData.data.state !== false){
+     if(userData.data.state === true){
     setUserLogin(true);
     console.log('is registred');
   }else{
@@ -20,6 +21,11 @@ const ContextSignInProvider = ({children}) =>{
     console.log('is not registred');
   }
   }
+
+  setTimeout(() => {
+  itsSignIn();
+  }, 50);
+  
  
 
   return (

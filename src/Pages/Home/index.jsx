@@ -3,8 +3,12 @@ import Layout from '../../Components/Layout'
 import Card from '../../Components/Card'
 import ProductDetail from '../../Components/ProductDetail'
 import { ShoppingCartContext } from '../../Context'
+import { ContextSignIn } from '../../Context/ContextSignIn'
+import {SignIn} from '../SignIn'
 
 function Home() {
+
+
   const context = useContext(ShoppingCartContext)
 
   const renderView = () => {
@@ -40,6 +44,8 @@ function Home() {
       <ProductDetail />
     </Layout>
   )
+
+  
 }
 
 export default Home

@@ -14,7 +14,7 @@ const useLocaleStorage = (name ,initialValue) =>{
       } catch (error) {
         console.log('error obteniendo datos de locale storage');
       }
-    }, 1000);
+    }, 0);
     
   },[]);
 

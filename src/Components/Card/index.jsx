@@ -41,7 +41,7 @@ const Card = (data) => {
 
   return (
     <div
-      className='bg-white cursor-pointer ss:w-52 xs:w-56 sm:w-44 md:w-56 h-60 rounded-lg'
+      className='bg-white cursor-pointer ss:w-52 xs:w-52 sm:w-44 md:w-56 h-60 rounded-lg'
       onClick={() => showProduct(data.data)}>
       <figure className='relative mb-2 w-full h-4/5'>
         <span className='absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5'>{data.data.category.name}</span>

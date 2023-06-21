@@ -3,3 +3,11 @@
   height: 86vh;
   bottom: 0;
 }
+@media (max-width:500px) {
+  .checkout-side-menu {
+    width: 320px;
+    height: 67vh;
+    bottom: 0;
+  }
+  
+}
