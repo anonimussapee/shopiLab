@@ -1,0 +1,11 @@
+.grid-session{
+  display: grid;
+  grid-template-columns: 1fr 1fr 50px;
+  grid-template-rows: 1fr 1fr;
+}
+.grid-session .trash{
+  grid-column: 3/4;
+  grid-row: 1/ span 2  ;
+  justify-self: center;
+  align-self: center;
+}

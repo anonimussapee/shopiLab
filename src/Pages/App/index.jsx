@@ -10,7 +10,6 @@ import Navbar from '../../Components/Navbar'
 import CheckoutSideMenu from '../../Components/CheckoutSideMenu'
 import './App.css'
 import { ContextSignInProvider } from '../../Context/ContextSignIn'
-import { SignOut } from '../SignOut'
 
 const AppRoutes = () => {
   let routes = useRoutes([
@@ -27,7 +26,6 @@ const AppRoutes = () => {
     { path: '/my-orders/last', element: <MyOrder /> },
     { path: '/my-orders/:id', element: <MyOrder /> },
     { path: '/sign-in', element: <SignIn /> },
-    { path: '/sign-out', element: <SignOut /> },
     { path: '/*', element: <NotFound /> },
   ])
 

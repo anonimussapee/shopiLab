@@ -31,7 +31,7 @@ const Navbar = () => {
           <li>
             <NavLink
               to='/clothes'
-              onClick={() => context.setSearchByCategory('nuevo')}
+              onClick={() => context.setSearchByCategory('clothes')}
               className={({ isActive }) =>
                 isActive ? activeStyle : undefined
               }>

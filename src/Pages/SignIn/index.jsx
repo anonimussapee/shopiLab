@@ -2,23 +2,34 @@ import { useContext, useState } from 'react'
 import Layout from '../../Components/Layout'
 import { ContextSignIn } from '../../Context/ContextSignIn';
 import { Link } from 'react-router-dom';
+import {TrashIcon} from '@heroicons/react/24/solid';
 
 function SignIn() {
 
   // this will control the user data from input
   const [dataLogin,setdataLogin] = useState({userName:'',userEmail:'',userPass:''}); 
+
+  const [openSignIn, setOpenSignIn] = useState(false);
   let btnActive = 'bg-black';
   let btnInactive = 'bg-gray-500';
   const context = useContext(ContextSignIn);
  
-    if(context.userData.data.state === false ){
+    if(context.userData.data.state === false && context.userData.data.userEmail.length>0 && context.userData.data.userName.length>0){
 
       return (
         <Layout>
           <h1 className='font-semibold'>Welcome</h1>
-          <div className='flex flex-wrap w-[320px] my-5  mx-auto justify-center gap-2'>
-            <p className='font-bold w-[45%]'>Tu Email:</p><p className='w-[45%] text-right'>{context.userData.data.userEmail}</p>
-            <p className='font-bold w-[45%]'>Tu Contraseña:</p><p className='w-[45%] text-right'>{`*`.repeat(context.userData.data.userPass.length)}</p>
+          <div className='flex flex-col w-[320px] my-5  mx-auto items-center gap-2'>
+            <div className='grid-session gap-2'>
+            <p className='font-bold '>Tu Email:</p><p className='text-right'>{context.userData.data?.userEmail}</p>
+            <p className='font-bold '>Tu Contraseña:</p><p className=' text-right'>{`*`.repeat(context.userData.data?.userPass.length)}</p>
+            <TrashIcon className='trash w-10 h-10' onClick={()=>{
+              window.localStorage.clear();
+              context.userData.save({});
+
+            }}/>
+            </div>
+            
             <Link to='/home' onClick={(e)=>{
               let changeState = {...context.userData.data} ;
               changeState.state = true;
@@ -32,7 +43,7 @@ function SignIn() {
            
         </Layout>
       );
-    }else{
+    }else if(context.userLogin === false && openSignIn === true){
       return (
         <Layout>
           SignIn
@@ -72,7 +83,7 @@ function SignIn() {
             </label>
             <Link to='/home' onClick={(e)=>{
               if(dataLogin.userName.length>2 && dataLogin.userEmail.length>5 && dataLogin.userPass.length>2){
-                if(dataLogin.userName.length>3 && dataLogin.userEmail.length>5 && dataLogin.userPass.length>5 ){
+                if(dataLogin.userName.length>3 && dataLogin.userEmail.length>5 && dataLogin.userPass.length>3 ){
                   let newDataLogin = {...dataLogin};
                 newDataLogin.state = true;
                 context.userData.save(newDataLogin);
@@ -90,6 +101,27 @@ function SignIn() {
           </form>
         </Layout>
       )
+    }else if(context.userLogin === false && Object.keys(context.userData.data).length === 0){
+
+      return (
+        <Layout>
+          <h1 className='font-semibold'>Welcome</h1>
+          <div className='flex flex-col w-[320px] my-5  mx-auto items-center gap-2'>
+            <div className='grid grid-cols-2  gap-2'>
+            <p className='font-bold '>Tu Email:</p><p className='text-right'> </p>
+            <p className='font-bold '>Tu Contraseña:</p><p className=' text-right'></p>
+            </div>
+            
+            
+              <button type='submit' className={`${btnInactive} w-60 mt-4 rounded-md font-semibold h-auto p-2 text-white `}>Login</button>
+          </div>
+          <p className='underline underline-offset-2 '>Olvide mi contraseña</p>
+          <button type='submit' className={`${btnActive}  w-60 mt-4 rounded-md font-semibold h-auto p-2 text-white`} onClick={()=>{
+            setOpenSignIn(true);
+          }} >Sign in</button>
+           
+        </Layout>
+      );
     }
  
   
