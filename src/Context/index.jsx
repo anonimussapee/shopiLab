@@ -1,4 +1,5 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect, useContext } from 'react'
+
 
 // this exports are to will connect with the context
 
@@ -28,8 +29,7 @@ export const ShoppingCartProvider = ({children}) => {
   // Shopping cart state · in here will Add products in cart
   const [cartProducts, setCartProducts] = useState([])
 
-  // Shopping cart ·this Order list no have data persistence
-  const [order, setOrder] = useState([])
+ 
 
   // Get products · data of fetch api is living in here 
   const [items, setItems] = useState(null)
@@ -74,17 +74,19 @@ export const ShoppingCartProvider = ({children}) => {
     }
   }
 
-  useEffect(() => {
 
-    if (searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY', items, searchByTitle, searchByCategory))
+    useEffect(() => {
+    
+      if (searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY', items, searchByTitle, searchByCategory))
 
-    if (searchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, searchByTitle, searchByCategory))
+      if (searchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, searchByTitle, searchByCategory))
 
-    if (!searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, searchByTitle, searchByCategory))
+      if (!searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, searchByTitle, searchByCategory))
 
-    if (!searchByTitle && !searchByCategory) setFilteredItems(filterBy(null, items, searchByTitle, searchByCategory))
+      if (!searchByTitle && !searchByCategory) setFilteredItems(filterBy(null, items, searchByTitle, searchByCategory))
+      
 
-  }, [items, searchByTitle, searchByCategory])
+    }, [items, searchByTitle, searchByCategory])
 
   return (
     <ShoppingCartContext.Provider value={{
@@ -100,8 +102,6 @@ export const ShoppingCartProvider = ({children}) => {
       isCheckoutSideMenuOpen,
       openCheckoutSideMenu,
       closeCheckoutSideMenu,
-      order,
-      setOrder,
       items,
       setItems,
       searchByTitle,

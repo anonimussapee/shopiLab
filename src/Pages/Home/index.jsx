@@ -3,24 +3,32 @@ import Layout from '../../Components/Layout'
 import Card from '../../Components/Card'
 import ProductDetail from '../../Components/ProductDetail'
 import { ShoppingCartContext } from '../../Context'
+import { ContextSignIn } from '../../Context/ContextSignIn'
 
 function Home() {
 
 
-  const context = useContext(ShoppingCartContext)
+  const context = useContext(ShoppingCartContext);
+
+  const contextUser = useContext(ContextSignIn);
 
   const renderView = () => {
-    if (context.filteredItems?.length > 0) {
-      return (
-        context.filteredItems?.map(item => (
-          <Card key={item.id} data={item} />
-        ))
-      )
-    } else {
-      return (
-        <div>We don't have anything :(</div>
-      )
+    if(contextUser.userLogin === true){
+
+       if (context.filteredItems?.length > 0) {
+        return (
+          context.filteredItems?.map(item => (
+            <Card key={item.id} data={item} />
+          ))
+        )
+      } else {
+        return (
+          <div>We don't have anything :(</div>
+        )
+      }
+
     }
+   
   }
 
   return (

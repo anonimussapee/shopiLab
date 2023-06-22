@@ -7,7 +7,7 @@ import {TrashIcon} from '@heroicons/react/24/solid';
 function SignIn() {
 
   // this will control the user data from input
-  const [dataLogin,setdataLogin] = useState({userName:'',userEmail:'',userPass:''}); 
+  const [dataLogin,setdataLogin] = useState({userName:'',userEmail:'',userPass:'', orders : ''}); 
 
   const [openSignIn, setOpenSignIn] = useState(false);
   let btnActive = 'bg-black';
@@ -34,6 +34,7 @@ function SignIn() {
               let changeState = {...context.userData.data} ;
               changeState.state = true;
               context.userData.save(changeState);
+              context.setUserLogin(true);
             }}>
               <button type='submit' className={`${btnActive} w-60 mt-4 rounded-md font-semibold h-auto p-2 text-white `}>Login</button>
           </Link>

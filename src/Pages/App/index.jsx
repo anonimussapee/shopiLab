@@ -34,15 +34,15 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <ShoppingCartProvider>
       <ContextSignInProvider>
+    <ShoppingCartProvider>
          <BrowserRouter>
         <AppRoutes />
         <Navbar />
         <CheckoutSideMenu />
       </BrowserRouter>
-      </ContextSignInProvider>
     </ShoppingCartProvider>
+      </ContextSignInProvider>
   )
 }
 

@@ -5,9 +5,12 @@ import { ShoppingCartContext } from '../../Context'
 import OrderCard from '../../Components/OrderCard'
 import { totalPrice } from '../../utils'
 import './styles.css'
+import { ContextSignIn } from '../../Context/ContextSignIn'
 
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext)
+
+  const ContextUser = useContext(ContextSignIn);
 
   const handleDelete = (id) => {
     const filteredProducts = context.cartProducts.filter(product => product.id != id)
@@ -21,10 +24,21 @@ const CheckoutSideMenu = () => {
       totalProducts: context.cartProducts.length,
       totalPrice: totalPrice(context.cartProducts)
     }
-
-    context.setOrder([...context.order, orderToAdd])
+    if(ContextUser.userData.data.orders.length>0){
+       let orderReady = [...ContextUser.userData.data.orders, orderToAdd];
+    let dataLocal = ContextUser.userData.data ;
+    dataLocal.orders = orderReady;
+    ContextUser.userData.save(dataLocal);
     context.setCartProducts([])
     context.setSearchByTitle(null)
+    }else{
+      let dataLocal = ContextUser.userData.data ;
+      dataLocal.orders = [orderToAdd];
+      ContextUser.userData.save(dataLocal);
+      context.setCartProducts([])
+      context.setSearchByTitle(null)
+    }
+   
   }
 
   return (
