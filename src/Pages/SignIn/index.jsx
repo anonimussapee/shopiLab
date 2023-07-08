@@ -83,7 +83,7 @@ function SignIn() {
               }} />
             </label>
             <Link to='/home' onClick={(e)=>{
-              if(dataLogin.userName.length>2 && dataLogin.userEmail.length>5 && dataLogin.userPass.length>2){
+              if(dataLogin.userName.length>2 && dataLogin.userEmail.length>3 && dataLogin.userPass.length>2){
                 if(dataLogin.userName.length>3 && dataLogin.userEmail.length>5 && dataLogin.userPass.length>3 ){
                   let newDataLogin = {...dataLogin};
                 newDataLogin.state = true;
