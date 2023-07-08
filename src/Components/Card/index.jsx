@@ -8,6 +8,7 @@ const Card = (data) => {
   const showProduct = (productDetail) => {
     context.openProductDetail()
     context.setProductToShow(productDetail)
+    context.setOpenSlide(false)
   }
 
   const addProductsToCart = (event, productData) => {
@@ -16,6 +17,7 @@ const Card = (data) => {
     context.setCartProducts([...context.cartProducts, productData])
     context.openCheckoutSideMenu()
     context.closeProductDetail()
+    context.setOpenSlide(false)
   }
 
   const renderIcon = (id) => {

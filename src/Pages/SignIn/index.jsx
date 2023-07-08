@@ -40,14 +40,14 @@ function SignIn() {
           </Link>
           </div>
           <p className='underline underline-offset-2 '>Olvide mi contraseña</p>
-          <button type='submit' className={`${btnInactive}  w-60 mt-4 rounded-md font-semibold h-auto p-2 text-white`} >Sign in</button>
+          <button type='submit' className={`${btnInactive}  w-60 mt-4 rounded-md font-semibold h-auto p-2 text-white`} >Registrarme</button>
            
         </Layout>
       );
     }else if(context.userLogin === false && openSignIn === true){
       return (
         <Layout>
-          SignIn
+          Registrar
           <form onSubmit={e => e.preventDefault()} className='mt-4 flex flex-col justify-center items-center w-[90%] text-center mx-auto h-auto gap-3'>
             <label htmlFor="userName" className='flex flex-col gap-3 '>
               <span>Ingresa tu Nombre de Usuario</span>
@@ -96,7 +96,7 @@ function SignIn() {
               e.preventDefault();
             }
               }} >
-               <button type='submit' className='bg-black w-60 mt-4 rounded-md font-semibold h-auto p-2 text-white' >Login</button>
+               <button type='submit' className='bg-black w-60 mt-4 rounded-md font-semibold h-auto p-2 text-white' >Registrar</button>
             </Link>
            
           </form>
@@ -119,7 +119,7 @@ function SignIn() {
           <p className='underline underline-offset-2 '>Olvide mi contraseña</p>
           <button type='submit' className={`${btnActive}  w-60 mt-4 rounded-md font-semibold h-auto p-2 text-white`} onClick={()=>{
             setOpenSignIn(true);
-          }} >Sign in</button>
+          }} >Registrarme</button>
            
         </Layout>
       );

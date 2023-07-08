@@ -15,7 +15,8 @@ module.exports = {
 
       'sm': '600px',
       // => @media (min-width: 600px) { ... }
-
+      'smMax':{'max': '600px'}
+      ,
       'md': '768px',
       // => @media (min-width: 768px) { ... }
 

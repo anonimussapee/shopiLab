@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext } from 'react'
+import { createContext, useState, useEffect} from 'react'
 
 
 // this exports are to will connect with the context
@@ -8,6 +8,10 @@ export const ShoppingCartContext = createContext()
 export const ShoppingCartProvider = ({children}) => {
   // Shopping Cart · Increment quantity, this will use to fixed cart status
   const [count, setCount] = useState(0)
+
+  // navslidebar state
+  const [openSlide, setOpenSlide] = useState(false)
+
 
   // Product Detail component· Open/Close state
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
@@ -108,7 +112,9 @@ export const ShoppingCartProvider = ({children}) => {
       setSearchByTitle,
       filteredItems,
       searchByCategory,
-      setSearchByCategory
+      setSearchByCategory,
+      openSlide,
+      setOpenSlide
     }}>
       {children}
     </ShoppingCartContext.Provider>

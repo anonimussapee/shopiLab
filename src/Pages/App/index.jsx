@@ -1,5 +1,5 @@
 import { useRoutes, BrowserRouter } from 'react-router-dom'
-import { ShoppingCartProvider } from '../../Context'
+import {  ShoppingCartProvider } from '../../Context'
 import Home from '../Home'
 import MyAccount from '../MyAccount'
 import MyOrder from '../MyOrder'
@@ -9,17 +9,20 @@ import {SignIn} from '../SignIn'
 import Navbar from '../../Components/Navbar'
 import CheckoutSideMenu from '../../Components/CheckoutSideMenu'
 import './App.css'
-import { ContextSignInProvider } from '../../Context/ContextSignIn'
+import { ContextSignIn, ContextSignInProvider } from '../../Context/ContextSignIn'
+import { useContext } from 'react'
+import { SlideBar } from '../../Components/Navbar/Slidebar'
 
 const AppRoutes = () => {
+  const context = useContext(ContextSignIn);
   let routes = useRoutes([
-    { path: '/', element: <Home /> },
-    { path: '/home', element: <Home /> },
-    { path: '/clothes', element: <Home /> },
-    { path: '/electronics', element: <Home /> },
-    { path: '/furnitures', element: <Home /> },
-    { path: '/shoes', element: <Home /> },
-    { path: '/others', element: <Home /> },
+    { path: '/', element:context.userLogin ? <Home /> : <SignIn />},
+    { path: '/home', element: context.userLogin ? <Home /> : <SignIn /> },
+    { path: '/clothes', element: context.userLogin ? <Home /> : <SignIn /> },
+    { path: '/electronics', element: context.userLogin ? <Home /> : <SignIn /> },
+    { path: '/furnitures', element: context.userLogin ? <Home /> : <SignIn /> },
+    { path: '/shoes', element: context.userLogin ? <Home /> : <SignIn /> },
+    { path: '/others', element: context.userLogin ? <Home /> : <SignIn /> },
     { path: '/my-account', element: <MyAccount /> },
     { path: '/my-order', element: <MyOrder /> },
     { path: '/my-orders', element: <MyOrders /> },
@@ -33,12 +36,16 @@ const AppRoutes = () => {
 }
 
 const App = () => {
+
   return (
       <ContextSignInProvider>
     <ShoppingCartProvider>
          <BrowserRouter>
         <AppRoutes />
         <Navbar />
+        
+          <SlideBar/>
+
         <CheckoutSideMenu />
       </BrowserRouter>
     </ShoppingCartProvider>

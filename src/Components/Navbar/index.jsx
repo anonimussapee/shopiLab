@@ -1,6 +1,6 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { ShoppingBagIcon } from '@heroicons/react/24/solid'
+import { Bars3Icon, ShoppingBagIcon } from '@heroicons/react/24/solid'
 import { ShoppingCartContext } from '../../Context'
 import { ContextSignIn } from '../../Context/ContextSignIn'
 
@@ -11,14 +11,14 @@ const Navbar = () => {
 
   if(contextOfUser.userLogin === true ){
     return (
-      <nav className='flex ss:flex-col md:flex-row ss:px-1 xs:justify-between items-center fixed z-10 top-0 w-full py-5 xs:px-8 text-sm font-light bg-white '>
-        <ul className='ss:grid ss:grid-cols-3 ss:gap-1 xs:flex xs:justify-center  items-center xs:gap-3'>
-          <li className='font-semibold text-lg'>
+      <nav className='flex px-1 items-center justify-center fixed z-10 top-0 w-full h-[3rem]  text-sm font-light bg-white '>
+        <ul className='flex justify-end w-full h-3rem items-center gap-5'>
+          <li className='font-semibold text-lg pt-4'>
             <NavLink to='/'>
               Shopi
             </NavLink>
           </li>
-          <li>
+          <li className='smMax:hidden smMax:w-0 sm:h-0'>
             <NavLink
               to='/'
               onClick={() => context.setSearchByCategory()}
@@ -28,7 +28,7 @@ const Navbar = () => {
               All
             </NavLink>
           </li>
-          <li>
+          <li className='smMax:hidden smMax:w-0 sm:h-0'>
             <NavLink
               to='/clothes'
               onClick={() => context.setSearchByCategory('clothes')}
@@ -38,7 +38,7 @@ const Navbar = () => {
               Clothes
             </NavLink>
           </li>
-          <li>
+          <li className='smMax:hidden smMax:w-0 sm:h-0'>
             <NavLink
               to='/electronics'
               onClick={() => context.setSearchByCategory('electronics')}
@@ -48,7 +48,7 @@ const Navbar = () => {
               Electronics
             </NavLink>
           </li>
-          <li>
+          <li className='smMax:hidden smMax:w-0 sm:h-0'>
             <NavLink
               to='/furnitures'
               onClick={() => context.setSearchByCategory('furniture')}
@@ -58,7 +58,7 @@ const Navbar = () => {
               Furnitures
             </NavLink>
           </li>
-          <li>
+          <li className='smMax:hidden smMax:w-0 sm:h-0'>
             <NavLink
               to='/shoes'
               onClick={() => context.setSearchByCategory('shoes')}
@@ -68,7 +68,7 @@ const Navbar = () => {
               Shoes
             </NavLink>
           </li>
-          <li>
+          <li className='smMax:hidden smMax:w-0 sm:h-0'>
             <NavLink
               to='/others'
               onClick={() => context.setSearchByCategory('others')}
@@ -78,107 +78,36 @@ const Navbar = () => {
               Others
             </NavLink>
           </li>
-        </ul>
-        <ul className='ss:grid ss:grid-cols-3 ss:gap-1 xs:flex xs:justify-center  items-center xs:gap-3'>
-          <li className='text-black/60'>
-            {contextOfUser.userData.data.userEmail}
-          </li>
           <li>
-            <NavLink
-             
-              to='/my-orders'
-              className={({ isActive }) =>
-                isActive ? activeStyle : undefined
-              }>
-              My Orders
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to='/my-account'
-              className={({ isActive }) =>
-                isActive ? activeStyle : undefined
-              }>
-              My Account
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to='/sign-in'
-              className={({ isActive }) =>
-                isActive ? activeStyle : undefined
-              } onClick={()=>{
-                let newState = {...contextOfUser.userData.data};
-                newState.state = false;
-                contextOfUser.userData.save(newState)
-                contextOfUser.setUserLogin(false)
-              }}>
-              Sign out
-            </NavLink>
-          </li>
-          <li className='flex items-center'>
-            <ShoppingBagIcon className='h-6 w-6 text-black'></ShoppingBagIcon>
-            <div>{context.cartProducts.length}</div>
+            <Bars3Icon className='w-10 h-10' onClick={()=>{
+              context.closeCheckoutSideMenu()
+              context.closeProductDetail()
+              context.setOpenSlide(!context.openSlide)
+            }}/>
           </li>
         </ul>
+       
       </nav>
     )
   }else{
     return (
-      <nav className='flex ss:flex-col md:flex-row ss:px-1 xs:justify-between items-center fixed z-10 top-0 w-full py-5 xs:px-8 text-sm font-light bg-white '>
-        <ul className='ss:grid ss:grid-cols-3 ss:gap-0 xs:flex xs:justify-center  text-center items-center xs:gap-3'>
+      <nav className='flex  px-1 justify-between items-center fixed z-10 top-0 w-full h-[3rem]  xs:px-8 text-sm font-light bg-white '>
+        <ul className=' flex justify-end w-full text-center items-center gap-3'>
           <li className='font-semibold text-lg'>
             <NavLink >
               Shopi
             </NavLink>
           </li>
+         
           <li>
-            <NavLink >
-              All
-            </NavLink>
-          </li>
-          <li>
-            <NavLink  >
-              Clothes
-            </NavLink>
-          </li>
-          <li>
-            <NavLink >
-              Electronics
-            </NavLink>
-          </li>
-          <li>
-            <NavLink  >
-              Furnitures
-            </NavLink>
-          </li>
-          <li>
-            <NavLink >
-              Shoes
-            </NavLink>
-          </li>
-          <li>
-            <NavLink >
-              Others
-            </NavLink>
+            <Bars3Icon className='w-10 h-10' onClick={()=>{
+              context.closeCheckoutSideMenu()
+              context.closeProductDetail()
+              context.setOpenSlide(!context.openSlide)
+            }}/>
           </li>
         </ul>
-        <ul className='flex justify-center  items-center gap-3'>
-        
-          <li>
-            <NavLink
-              to='/sign-in'
-              className={({ isActive }) =>
-                isActive ? activeStyle : undefined
-              }>
-              Sign In
-            </NavLink>
-          </li>
-          <li className='flex items-center'>
-            <ShoppingBagIcon className='h-6 w-6 text-black'></ShoppingBagIcon>
-            <div>{context.cartProducts.length}</div>
-          </li>
-        </ul>
+      
       </nav>
     )
   }
